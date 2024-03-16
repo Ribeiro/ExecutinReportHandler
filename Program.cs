@@ -17,8 +17,8 @@ var executionReportHandlers = new Dictionary<string, AbstractExecutionReportHand
 ExecutionReport currentExecReport = new ExecutionReport
 {
     ExecutionType = ExecutionType.New,
-    ClOrdId = "BTG_456",
-    OrigClOrdId = "BTG_123"
+    ClOrdId = "ABC_456",
+    OrigClOrdId = "ABC_123"
 };
 
 ExecutionReportContainer execReportContainer = new ExecutionReportContainer(currentExecReport);
