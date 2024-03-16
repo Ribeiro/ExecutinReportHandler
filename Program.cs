@@ -24,7 +24,6 @@ ExecutionReport currentExecReport = new ExecutionReport
 ExecutionReportContainer execReportContainer = new ExecutionReportContainer(currentExecReport);
 
 AbstractExecutionReportHandler handler;
-
 switch (execReportContainer.Get(ExecutionReportContainerKey.Current).ExecutionType)
 {
     case var value when value == ExecutionType.PendingCancel:
