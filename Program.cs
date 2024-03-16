@@ -1,42 +1,42 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-
 using Enums;
 using handlers;
 using Models;
 
-ExecutionReport executionReport = new ExecutionReport();
-executionReport.ExecutionStatus = ExecutionStatus.PendingCancel;
-executionReport.ClOrdId = "BTG_456";
-executionReport.OrigClOrdId = "BTG_123";
-
-
 AbstractExecutionReportHandler cancelFlowExecutionReportHandler = new CancelFlowExecutionReportHandler();
 AbstractExecutionReportHandler defaultExecutionReportHandler = new DefaultExecutionReportHandler();
 
-var executionReportHandlers = new Dictionary<ExecutionStatus, AbstractExecutionReportHandler>();
-executionReportHandlers.Add(ExecutionStatus.PendingCancel, cancelFlowExecutionReportHandler);
-executionReportHandlers.Add(ExecutionStatus.Cancel, cancelFlowExecutionReportHandler);
-executionReportHandlers.Add(ExecutionStatus.New, defaultExecutionReportHandler);
+var executionReportHandlers = new Dictionary<string, AbstractExecutionReportHandler>
+{
+    { ExecutionType.PendingCancel, cancelFlowExecutionReportHandler },
+    { ExecutionType.Cancel, cancelFlowExecutionReportHandler },
+    { ExecutionType.Default, defaultExecutionReportHandler }
+};
 
+ExecutionReport currentExecReport = new ExecutionReport
+{
+    ExecutionType = ExecutionType.New,
+    ClOrdId = "BTG_456",
+    OrigClOrdId = "BTG_123"
+};
+
+ExecutionReportContainer execReportContainer = new ExecutionReportContainer(currentExecReport);
 
 AbstractExecutionReportHandler handler;
 
-switch (executionReport.ExecutionStatus)
+switch (execReportContainer.Get(ExecutionReportContainerKey.Current).ExecutionType)
 {
-
-    case ExecutionStatus.PendingCancel:
-        handler = executionReportHandlers[ExecutionStatus.PendingCancel];
-        handler.Handle(executionReport);
+    case var value when value == ExecutionType.PendingCancel:
+        handler = executionReportHandlers[ExecutionType.PendingCancel];
+        handler.Handle(execReportContainer);
         break;
-    case ExecutionStatus.Cancel:
-        handler = executionReportHandlers[ExecutionStatus.Cancel];
-        handler.Handle(executionReport);
-        break;
-    case ExecutionStatus.New:
-        handler = executionReportHandlers[ExecutionStatus.New];
-        handler.Handle(executionReport);
+    case var value when value == ExecutionType.Cancel:
+        handler = executionReportHandlers[ExecutionType.Cancel];
+        handler.Handle(execReportContainer);
         break;
     default:
+        handler = executionReportHandlers[ExecutionType.Default];
+        handler.Handle(execReportContainer);
         break;
 }

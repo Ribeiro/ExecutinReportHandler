@@ -11,7 +11,7 @@ namespace Models
 
         public bool? SolicitedFlag { get; set; }
 
-        public ExecutionStatus ExecutionStatus { get; set; }
+        public string ExecutionType { get; set; }
 
         public object Clone()
         {
@@ -20,9 +20,7 @@ namespace Models
                 ClOrdId = ClOrdId,
                 OrigClOrdId = OrigClOrdId,
                 SolicitedFlag = SolicitedFlag,
-                ExecutionStatus = ExecutionStatus
-
-
+                ExecutionType = ExecutionType
             };
             return clonedExecutionReport;
         }

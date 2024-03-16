@@ -4,14 +4,14 @@ namespace handlers
 {
     public abstract class AbstractExecutionReportHandler
     {
-        public void Handle(ExecutionReport execReport)
+        public void Handle(ExecutionReportContainer execReportContainer)
         {
-            SaveOrUpdateExecutionReport(execReport);
-            InsertExecutionReportEvent(execReport);
+            SaveOrUpdateExecutionReport(execReportContainer);
+            InsertExecutionReportEvent(execReportContainer);
         }
 
-        public abstract void SaveOrUpdateExecutionReport(ExecutionReport execReport);
-        public abstract void InsertExecutionReportEvent(ExecutionReport execReport);
+        public abstract void SaveOrUpdateExecutionReport(ExecutionReportContainer execReportContainer);
+        public abstract void InsertExecutionReportEvent(ExecutionReportContainer execReportContainer);
 
     }
 }
