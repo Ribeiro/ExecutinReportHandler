@@ -16,15 +16,25 @@ namespace Models
 
         public void Add(string key, ExecutionReport execReport)
         {
-            if(!allowedKeys.Contains(key)){
-                throw new ArgumentException(message: $"Given key {key} is not allowed in ExecutionReportContainer!");
-            }
+            AssertOnlyAllowed(key);
+            AssertUnique(key);
+            _containerDict.Add(key, execReport);
+        }
 
+        private void AssertUnique(string key)
+        {
             if (_containerDict.ContainsKey(key))
             {
                 throw new ArgumentException(message: $"Given key {key} already exists in ExecutionReportContainer!");
             }
-            _containerDict.Add(key, execReport);
+        }
+
+        private void AssertOnlyAllowed(string key)
+        {
+            if (!allowedKeys.Contains(key))
+            {
+                throw new ArgumentException(message: $"Given key {key} is not allowed in ExecutionReportContainer!");
+            }
         }
 
         public ExecutionReport Get(string key)
