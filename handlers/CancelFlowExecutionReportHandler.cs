@@ -27,7 +27,8 @@ namespace handlers
 
             ExecutionReport originalExecReport = currentExecReport.GetOriginalExecutionReportForCancelFlow();
             Console.WriteLine($"Recreating original ExecutionReport instance and adding it to ExecutionReportContainer: {originalExecReport}");
-            execReportContainer.Add(ExecutionReportContainerKey.Original, originalExecReport);
+            //execReportContainer.Add(ExecutionReportContainerKey.Original, originalExecReport);
+            execReportContainer.Add("WTF", originalExecReport);
 
             Console.WriteLine("Executing flow...");
         }

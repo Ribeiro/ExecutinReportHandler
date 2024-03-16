@@ -16,7 +16,7 @@ var executionReportHandlers = new Dictionary<string, AbstractExecutionReportHand
 
 ExecutionReport currentExecReport = new ExecutionReport
 {
-    ExecutionType = ExecutionType.New,
+    ExecutionType = ExecutionType.Cancel,
     ClOrdId = "ABC_456",
     OrigClOrdId = "ABC_123"
 };
