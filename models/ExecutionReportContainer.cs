@@ -6,7 +6,7 @@ namespace Models
 {
     public class ExecutionReportContainer
     {
-        private readonly List<string> allowedKeys = new List<string>{ExecutionReportContainerKey.Current, ExecutionReportContainerKey.Original};
+        private static readonly List<string> allowedKeys = [ExecutionReportContainerKey.Current, ExecutionReportContainerKey.Original];
         private readonly Dictionary<string, ExecutionReport> _containerDict;
         public ExecutionReportContainer(ExecutionReport execReport)
         {
