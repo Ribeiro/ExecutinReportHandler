@@ -26,11 +26,11 @@ ExecutionReportContainer execReportContainer = new ExecutionReportContainer(curr
 AbstractExecutionReportHandler handler;
 switch (execReportContainer.Get(ExecutionReportContainerKey.Current).ExecutionType)
 {
-    case var value when value == ExecutionType.PendingCancel:
+    case var value when value.Equals(ExecutionType.PendingCancel):
         handler = executionReportHandlers[ExecutionType.PendingCancel];
         handler.Handle(execReportContainer);
         break;
-    case var value when value == ExecutionType.Cancel:
+    case var value when value.Equals(ExecutionType.Cancel):
         handler = executionReportHandlers[ExecutionType.Cancel];
         handler.Handle(execReportContainer);
         break;
