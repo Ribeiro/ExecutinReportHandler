@@ -1,5 +1,6 @@
 
 
+using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
 using Enums;
 
@@ -42,6 +43,10 @@ namespace Models
 
         public ExecutionReport Get(string key)
         {
+            if (!allowedKeys.Contains(key))
+            {
+                throw new ArgumentException(message: $"Given key {key} is not allowed in ExecutionReportContainer!");
+            }
             return _containerDict[key];
         }
 
@@ -53,8 +58,8 @@ namespace Models
             }
         }
 
-        public List<ExecutionReport> GetAll(){
-            return  _containerDict.Values.ToList();
+        public ReadOnlyCollection<ExecutionReport> GetAll(){
+            return new ReadOnlyCollection<ExecutionReport>(_containerDict.Values.ToList());
         }
 
     }
