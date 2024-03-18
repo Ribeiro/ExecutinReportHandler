@@ -1,5 +1,6 @@
 
 
+using System.Diagnostics.CodeAnalysis;
 using Enums;
 
 namespace Models
@@ -10,12 +11,14 @@ namespace Models
         private readonly Dictionary<string, ExecutionReport> _containerDict;
         public ExecutionReportContainer(ExecutionReport execReport)
         {
+            AssertIsNotNull(execReport);
             _containerDict = [];
             _containerDict.Add(ExecutionReportContainerKey.Current, execReport);
         }
 
         public void Add(string key, ExecutionReport execReport)
         {
+            AssertIsNotNull(execReport);
             AssertOnlyAllowed(key);
             AssertUnique(key);
             _containerDict.Add(key, execReport);
@@ -42,7 +45,17 @@ namespace Models
             return _containerDict[key];
         }
 
+        private void AssertIsNotNull([NotNull] object? nullableReference)
+        {
+            if (nullableReference == null)
+            {
+                throw new ArgumentNullException(paramName:"executionReport");
+            }
+        }
 
+        public List<ExecutionReport> GetAll(){
+            return  _containerDict.Values.ToList();
+        }
 
     }
 

@@ -11,7 +11,12 @@ namespace handlers
         }
 
         public abstract void SaveOrUpdateExecutionReport(ExecutionReportContainer execReportContainer);
-        public abstract void InsertExecutionReportEvent(ExecutionReportContainer execReportContainer);
+        public virtual void InsertExecutionReportEvent(ExecutionReportContainer execReportContainer){
+            var reports = execReportContainer.GetAll();
+            foreach (var report in reports){
+                Console.WriteLine($"Inserting {report} into TB_EXECUTION_REPORT_EVENT");
+            }
+        }
 
     }
 }
