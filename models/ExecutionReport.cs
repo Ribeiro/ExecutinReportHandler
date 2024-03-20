@@ -11,7 +11,7 @@ namespace Models
 
         public bool? SolicitedFlag { get; set; }
 
-        public string? ExecutionType { get; set; }
+        public char? ExecutionType { get; set; }
 
         public object Clone()
         {

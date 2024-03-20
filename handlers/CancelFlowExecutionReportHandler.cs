@@ -5,6 +5,11 @@ namespace handlers
 {
     public class CancelFlowExecutionReportHandler : AbstractExecutionReportHandler
     {
+        public CancelFlowExecutionReportHandler(string logger, string dbConnectionService) : base(logger, dbConnectionService)
+        {   
+            
+        }
+
         public override void SaveOrUpdateExecutionReport(ExecutionReportContainer execReportContainer)
         {
             Console.WriteLine("Executing SaveOrUpdateExecutionReport from CancelFlowExecutionReportHandler...");
@@ -14,8 +19,8 @@ namespace handlers
 
             ExecutionReport originalExecReport = currentExecReport.GetOriginalExecutionReportForCancelFlow();
             Console.WriteLine($"Recreating original ExecutionReport instance and adding it to ExecutionReportContainer: {originalExecReport}");
-            //execReportContainer.Add(ExecutionReportContainerKey.Original, originalExecReport);
-            execReportContainer.Add("WTF", originalExecReport);
+            execReportContainer.Add(ExecutionReportContainerKey.Original, originalExecReport);
+            //execReportContainer.Add("WTF", originalExecReport);
 
             Console.WriteLine("Executing flow...");
         }

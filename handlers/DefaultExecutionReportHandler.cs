@@ -6,6 +6,10 @@ namespace handlers
 {
     public class DefaultExecutionReportHandler : AbstractExecutionReportHandler
     {
+        public DefaultExecutionReportHandler(string logger, string dbConnectionService) : base(logger, dbConnectionService)
+        {
+        }
+
         public override void SaveOrUpdateExecutionReport(ExecutionReportContainer execReportContainer)
         {
             Console.WriteLine("Executing SaveOrUpdateExecutionReport from DefaultExecutionReportHandler...");

@@ -4,10 +4,10 @@ using Enums;
 using handlers;
 using Models;
 
-AbstractExecutionReportHandler cancelFlowExecutionReportHandler = new CancelFlowExecutionReportHandler();
-AbstractExecutionReportHandler defaultExecutionReportHandler = new DefaultExecutionReportHandler();
+AbstractExecutionReportHandler cancelFlowExecutionReportHandler = new CancelFlowExecutionReportHandler("logger", "dbConnectionService");
+AbstractExecutionReportHandler defaultExecutionReportHandler = new DefaultExecutionReportHandler("logger", "dbConnectionService");
 
-var executionReportHandlers = new Dictionary<string, AbstractExecutionReportHandler>
+var executionReportHandlers = new Dictionary<char, AbstractExecutionReportHandler>
 {
     { ExecutionType.PendingCancel, cancelFlowExecutionReportHandler },
     { ExecutionType.Cancel, cancelFlowExecutionReportHandler },

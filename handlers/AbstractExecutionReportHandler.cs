@@ -4,6 +4,15 @@ namespace handlers
 {
     public abstract class AbstractExecutionReportHandler
     {
+        public string Logger {get;}
+        public string DbConnectionService {get;}
+
+        protected AbstractExecutionReportHandler(string logger, string dbConnectionService)
+        {
+            Logger = logger;
+            DbConnectionService = dbConnectionService;
+        }
+
         public void Handle(ExecutionReportContainer execReportContainer)
         {
             SaveOrUpdateExecutionReport(execReportContainer);
